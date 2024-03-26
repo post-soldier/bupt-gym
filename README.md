@@ -10,7 +10,7 @@
     
     (2)登录微信，运行抓包软件，进入联系人-北京邮电大学-体育馆预约,随便点几下
     
-    (3)停止抓包，找到包含“reservation.bupt.edu.cn”的请求，在请求头里找到Cookie，里面有一段“PHPSESSID=xxxxxx”,xxxxxxx就是我们要抓取的数据，记下来(每天都会变，每次都需要重新获取)
+    (3)停止抓包，找到包含“reservation.bupt.edu.cn”的请求，在请求头里找到Cookie，里面有一段“PHPSESSID=xxxxxx”,xxxxxxx就是我们要抓取的数据，记下来(每天都会变，每天都需要重新获取)
     
   3.将获取到的参数放在PHPSESSID.txt文件中
   
