@@ -1,6 +1,8 @@
 import requests
 import execjs
 
+from datetime import datetime
+
 with open("../PHPSESSID.txt", "r") as f1:
     PHPSESSID = f1.read()
 
@@ -16,21 +18,23 @@ def get_balance_gym(time, date):
         'think_language': 'zh-cn',
     }
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x6309092b) XWEB/9079 Flue',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'pragma': 'no-cache',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'accept-language': 'zh-CN,zh;q=0.9',
         'cache-control': 'no-cache',
-        'sec-ch-ua': '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"',
-        'x-requested-with': 'XMLHttpRequest',
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'origin': 'https://reservation.bupt.edu.cn',
+        'pragma': 'no-cache',
+        'priority': 'u=1, i',
+        'referer': 'https://reservation.bupt.edu.cn/index.php/Wechat/Show/user',
+        'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"Windows"',
-        'origin': 'https://reservation.bupt.edu.cn',
-        'sec-fetch-site': 'none',
-        'sec-fetch-mode': 'document',
         'sec-fetch-dest': 'empty',
-        'accept-language': 'zh-CN,zh;q=0.9',
+        'sec-fetch-mode': 'document',
+        'sec-fetch-site': 'none',
         'upgrade-insecure-requests': '1',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x6309092b) XWEB/9079 Flue',
+        'x-requested-with': 'XMLHttpRequest',
     }
     if time < 10:
         time = "0" + str(time)
@@ -62,7 +66,10 @@ def get_balance_gym(time, date):
         js = f.read()
 
     ctx = execjs.compile(js)
+    while datetime.now().strftime("%H") != 12:
+        pass
+    print(1)
     ctx.call("main", PHPSESSID,str(date) + time, ticket)
 
 #example
-get_balance_gym(16,20240508)
+get_balance_gym(2,20240622)
