@@ -4,9 +4,20 @@
 
   1.安装运行所需环境，在根目录下，运行 pip install -r requirements.txt
   
-    1.1 需要selenium驱动，我传了一个谷歌的，如果不能用请百度selenuim安装，并在TencentSliderVerify.py中的第91行修改对应驱动的地址
-
-  2.手动获取所需参数：
+  2.需要selenium驱动，请使用谷歌浏览器（没有的话先安装）
+  
+    (1) 下载谷歌浏览器，查看版本（右上角三个点-设置-左侧边栏最下的关于Chrome）
+    
+    (2) 登录https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json查看对应版本的驱动下载地址
+    
+    (3) Ctrl + F查找对应版本的驱动（版本不需要完全相同，前三位版本号一样即可）
+    
+    (4) 下载结尾为"chromedriver-win64.zip"的文件，一定要是driver
+    
+    (5) 解压，里面应该只有两三个文件，其中有一个是"chromedriver.exe",复制这个到程序路径下，替换掉自带的chromedriver.exe
+    
+        
+  3.手动获取所需参数：
   
     (1)下载一个抓包软件，这里就以国产的Reqable举例，如何配置就不再此进行说明了，B站上有教程
     
@@ -14,9 +25,9 @@
     
     (3)停止抓包，找到包含“reservation.bupt.edu.cn”的请求，在请求头里找到Cookie，里面有一段“PHPSESSID=xxxxxx”,xxxxxxx就是我们要抓取的数据，记下来(每天都会变，每天都需要重新获取)
     
-  3.将获取到的参数放在PHPSESSID.txt文件中或者在可视化界面修改
+  4.将获取到的参数放在PHPSESSID.txt文件中或者在可视化界面修改
 
-  4.选择对应的程序运行，健身房或者羽毛球
+  5.选择对应的程序运行，健身房或者羽毛球
 
      健身房：需要设置两个参数，第一个是日期（一般是当天的后一天，会自动填写，如有特殊需求再修改）
      羽毛球场：需要设置三个参数，第一个是日期(同上)，第二个是场号(共九个，可多选)，第三个是时间段（可多选），别选太多，要不容易失败
