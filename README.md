@@ -1,11 +1,11 @@
 自动抢北邮本部羽毛球场，体育馆脚本。
 
-请确保有Nodejs环境，如果没有请自行百度安装。
-
 如何使用：
 
   1.安装运行所需环境，在根目录下，运行 pip install -r requirements.txt
   
+    1.1 需要selenium驱动，我传了一个谷歌的，如果不能用请百度selenuim安装，并在TencentSliderVerify.py中的第91行修改对应驱动的地址
+
   2.手动获取所需参数：
   
     (1)下载一个抓包软件，这里就以国产的Reqable举例，如何配置就不再此进行说明了，B站上有教程
@@ -14,45 +14,27 @@
     
     (3)停止抓包，找到包含“reservation.bupt.edu.cn”的请求，在请求头里找到Cookie，里面有一段“PHPSESSID=xxxxxx”,xxxxxxx就是我们要抓取的数据，记下来(每天都会变，每天都需要重新获取)
     
-  3.将获取到的参数放在PHPSESSID.txt文件中
-  
-  4.打开badminton.py,找到最下面的“get_balance_badminton(1,9,20180205)”的函数调用，这是我们抢场的函数
-  
-  ![image](https://github.com/post-soldier/bupt-gym/assets/165042370/71971fe7-ddbe-4ae4-804d-d1823757062b)
+  3.将获取到的参数放在PHPSESSID.txt文件中或者在可视化界面修改
 
-  5.参数说明
-  
-    第一个参数是羽毛球场编号，如要预定“羽毛球场1号”，则id=1
-  
-    第二个参数是时间段，在time.txt中查表得到，如要预定“15:00-16:00"时间段的场，则time=9
-    
-    第三个参数是要预定的日期，date=“20180205”表明要预约2018年2月5号的场次
+  4.选择对应的程序运行，健身房或者羽毛球
 
-  6.修改对应参数
+     健身房：需要设置两个参数，第一个是日期（一般是当天的后一天，会自动填写，如有特殊需求再修改）
+     羽毛球场：需要设置三个参数，第一个是日期(同上)，第二个是场号(共九个，可多选)，第三个是时间段（可多选），别选太多，要不容易失败
+
+  5.修改好参数就可以运行了，大概提前一分钟开始，因为过滑块验证需要时间
+
+  6.运行时不要乱动鼠标，以免影响自动程序过滑块验证
   
-  7.运行，开始抢场
+  7.健身房抢成功会有弹窗提醒，羽毛球抢成功会在命令行出现“success”
+
+  8.可选两种支付方式，余额和微信支付。微信支付需要抢完后进入订单界面完成支付
   
 
 
   注意事项：
   
-    1.本程序是死循环，抢到场后请手动暂停
+    1.如果滑块验证出现请求太频繁，可以试着开手机热点或者挂梯子
     
-    2.如果出现“requests.exceptions.ProxyError: HTTPSConnectionPool”类型的错误，可能是因为抓包软件没有关闭导致的，请关闭后重试
+    2.如果出现“requests.exceptions.ProxyError: HTTPSConnectionPool”类型的错误，可能是因为抓包软件或者梯子没有关闭导致的，请关闭系统代理
 
-
-  求助：
-    本程序也是可以抢健身房的，但是在进入付款界面的时候有腾讯的滑块检测，有没有大佬知道怎么直接使用js逆向破解的，求教。
-    
-    在网上找到4篇文章，也看不懂，希望有看得懂的大佬能指点一下。
-    
-    https://www.52pojie.cn/thread-1521480-1-1.html
-    
-    https://mp.weixin.qq.com/s/C8gB-D6EUliPXoMgjk0Bag
-    
-    https://mp.weixin.qq.com/s/EmwuL3ToKwDFwCILZTM1AQ
-    
-    https://blog.csdn.net/weixin_43411585/article/details/123810961
-
-
-    
+    3.如要使用余额支付，请在主程序代码里搜索“mixed_payment_type”,将后面的wechat_pay更换成"balance_pay"
