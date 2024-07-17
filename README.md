@@ -1,5 +1,7 @@
 自动抢北邮本部羽毛球场，体育馆脚本。
 
+强烈推荐使用release中的打包好的文件运行
+
 如何使用：
 
   1.安装运行所需环境，在根目录下，运行 pip install -r requirements.txt
