@@ -2,6 +2,10 @@
 
 强烈推荐使用release中的打包好的文件运行
 
+推荐结合指导视频食用：
+
+https://www.bilibili.com/list/1970529919
+
 如何使用：
 
   1.下载对应的release，包括健身房和羽毛球场(new_gym.zip & new_badminton.zip)
