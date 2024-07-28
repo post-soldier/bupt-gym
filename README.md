@@ -4,7 +4,7 @@
 
 推荐结合指导视频食用：
 
-https://www.bilibili.com/list/1970529919
+https://b23.tv/Kx0TOKa
 
 如何使用：
 
