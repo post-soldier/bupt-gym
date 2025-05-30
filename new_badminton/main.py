@@ -241,7 +241,7 @@ def check_captcha(room_id):
     return response.json()["is_open_reserve_captcha"]
 
 
-def get_valid_value(area_id, room_id, time_id, date):
+def get_valid_value_and_price(area_id, room_id, time_id, date):
     cookies = {
         'PHPSESSID': PHPSESSID,
     }
@@ -280,7 +280,8 @@ def get_valid_value(area_id, room_id, time_id, date):
         headers=headers,
     )
     value = re.findall("id='form_valid_code_value' value=\"(.*?)\"", response.text)[0]
-    return value
+    price = re.findall('id=\"no_card_price\" value=\"(.*?)\"', response.text)[0]
+    return value,price
 
 
 def pay(time_id, room_name, room_id, ticket):
@@ -317,7 +318,7 @@ def pay(time_id, room_name, room_id, ticket):
     if sign == 0:
         while int(datetime.now().strftime("%H")) < 10:
             continue
-    valid_value = get_valid_value("5982", room_id, time_id, time_id[0:6])
+    valid_value,price = get_valid_value_and_price("5982", room_id, time_id, time_id[0:6])
     print(valid_value)
 
     data = f'------WebKitFormBoundaryfAtVbB67k98OsEGW\r\nContent-Disposition: form-data; ' \
@@ -340,7 +341,7 @@ def pay(time_id, room_name, room_id, ticket):
            f'-Disposition: form-data; name=\"selected_soft_name\"\r\n\r\n\r\n------WebKitFormBoundaryfAtVbB67k98OsEGW' \
            f'\r\nContent-Disposition: form-data; ' \
            f'name=\"time_id\"\r\n\r\n{time_id}\r\n------WebKitFormBoundaryfAtVbB67k98OsEGW\r\nContent-Disposition: ' \
-           f'form-data; name=\"total_amount\"\r\n\r\n50\r\n------WebKitFormBoundaryfAtVbB67k98OsEGW\r\nContent' \
+           f'form-data; name=\"total_amount\"\r\n\r\n{price}\r\n------WebKitFormBoundaryfAtVbB67k98OsEGW\r\nContent' \
            f'-Disposition: form-data; name=\"times_arr\"\r\n\r\nArray\r\n------WebKitFormBoundaryfAtVbB67k98OsEGW\r' \
            f'\nContent-Disposition: form-data; ' \
            f'name=\"packages_showing_type\"\r\n\r\n2\r\n------WebKitFormBoundaryfAtVbB67k98OsEGW\r\nContent' \

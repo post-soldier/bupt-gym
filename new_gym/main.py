@@ -265,7 +265,9 @@ def get_valid_value(area_id, room_id, time_id, year_month):
     # )
 
     value = re.findall("id='form_valid_code_value' value=\"(.*?)\"", response.text)[0]
-    return value
+    price = re.findall('id=\"no_card_price\" value=\"(.*?)\"', response.text)[0]
+    return value, price
+
 
 
 def pay(time_id, ticket):
@@ -306,7 +308,7 @@ def pay(time_id, ticket):
 
         while int(datetime.now().strftime("%S")) < 1:
             continue
-    valid_value = get_valid_value("5985", "15415", time_id, time_id[0:6])
+    valid_value,price = get_valid_value("5985", "15415", time_id, time_id[0:6])
 
     print(time_id)
     print(valid_value)
@@ -327,7 +329,7 @@ def pay(time_id, ticket):
            f'-Disposition: form-data; name=\"selected_soft_name\"\r\n\r\n\r\n------WebKitFormBoundary1FOdTJeAgQAaYSJ0\r' \
            f'\nContent-Disposition: form-data; ' \
            f'name=\"time_id\"\r\n\r\n{time_id}\r\n------WebKitFormBoundary1FOdTJeAgQAaYSJ0\r\nContent-Disposition: ' \
-           f'form-data; name=\"total_amount\"\r\n\r\n16\r\n------WebKitFormBoundary1FOdTJeAgQAaYSJ0\r\nContent' \
+           f'form-data; name=\"total_amount\"\r\n\r\n{price}\r\n------WebKitFormBoundary1FOdTJeAgQAaYSJ0\r\nContent' \
            f'-Disposition: form-data; name=\"times_arr\"\r\n\r\nArray\r\n------WebKitFormBoundary1FOdTJeAgQAaYSJ0\r' \
            f'\nContent-Disposition: form-data; ' \
            f'name=\"packages_showing_type\"\r\n\r\n2\r\n------WebKitFormBoundary1FOdTJeAgQAaYSJ0\r\nContent-Disposition: ' \
